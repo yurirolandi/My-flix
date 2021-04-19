@@ -1,0 +1,20 @@
+.comment {
+    display: flex;
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.comment-body{
+    overflow: hidden;
+}
+
+.comment-body p{
+    margin: 0 0 0.5rem 1rem;
+}
