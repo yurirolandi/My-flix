@@ -100,7 +100,7 @@ function Search() {
                                     logo="https://yt3.ggpht.com/ytc/AAUvwninj1E2MC-2aA4iQ3H68k3NvsHDjY36yQhMIJnD=s68-c-k-c0x00ffffff-no-rj"
                                     title={video.snippet.title}
                                     text="Descrição"
-                                    id={video.id}
+                                    id={video.id.videoId}
                                 />
                             </div>
                         )
