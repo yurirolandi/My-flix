@@ -50,10 +50,10 @@ function Watch() {
         let array = favorites;
         let addArray = true;
 
-        array.map((item: any, index: number) => {
-            if (item.id === video.id) {
-                array.splice(index, 1);
+        array.map((item: any) => {
+            if (item.id === video.id) {                
                 addArray = false;
+                return;
             };
         });
         if (addArray) {
