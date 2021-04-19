@@ -1,0 +1,58 @@
+.watch-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.watch-playlist {
+    margin: 0 1rem;
+}
+
+.watch-playlist__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+}
+
+.watch-player {
+    height: 70vh;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.info-title {
+    min-width: 200px;
+    padding: 1.5rem;
+}
+
+.info-title h3 {
+    font-size: 1.7rem;
+}
+
+.info-title p {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+}
+
+.info-likeds {
+    min-width: 200px;
+    display: flex;
+    padding: 1.5rem;
+    justify-content: center;
+}
+
+.info-likeds span {
+    margin-left: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.5rem;
+}
+.info-likeds span p {
+    margin-left: 0.5rem;
+}
