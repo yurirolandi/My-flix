@@ -17,7 +17,7 @@ function Favorite() {
     function removeFavorite(video: any) {
         let array = favorite;
 
-        array.map((item:any, index: number) => {
+        array.map((item: any, index: number) => {
             if (item.id === video.id) {
                 array.splice(index, 1);
                 setFavorite([...array])
@@ -33,23 +33,20 @@ function Favorite() {
             <div className="container">
                 <div className="container__grid">
 
-                {
+                    {
                         favorite.length > 0 ?
-                        favorite.map((video: any, index: number) => {
+                            favorite.map((video: any, index: number) => {
 
-                            return (<div className="coluna" key={index}>
-                                <CardVideo                                                              
-                                    thumb={video.snippet.thumbnails.high.url}
-                                    logo="https://yt3.ggpht.com/ytc/AAUvwninj1E2MC-2aA4iQ3H68k3NvsHDjY36yQhMIJnD=s68-c-k-c0x00ffffff-no-rj"
-                                    title={video.snippet.title}
-                                    text={video.snippet.channelTitle}
-                                    id={video.id}        
-                                />
-                                <div className="favorite">
-                                    <FaHeart color="red" onClick={() => removeFavorite(video)} />
-                                </div>
-                            </div>)
-                        }) : <h1>Você não tem nenhum video como favorito!</h1>
+                                return (<div className="coluna" key={index}>
+                                    <CardVideo
+                                        video={video}
+                                        id={video.id}
+                                    />
+                                    <div className="favorite">
+                                        <FaHeart color="red" onClick={() => removeFavorite(video)} />
+                                    </div>
+                                </div>)
+                            }) : <h1>Você não tem nenhum video como favorito!</h1>
                     }
                 </div>
             </div>

@@ -19,8 +19,8 @@ function Home() {
         }).then((response) => {
             setVideo(response.data.items)
         })
-    }, []);
-   
+    }, []);   
+  
 
     return (
         <>
@@ -36,12 +36,8 @@ function Home() {
 
                             return (<div className="coluna" key={index}>
                                 <CardVideo
-                                    thumb={video.snippet.thumbnails.high.url}
-                                    logo="https://yt3.ggpht.com/ytc/AAUvwninj1E2MC-2aA4iQ3H68k3NvsHDjY36yQhMIJnD=s68-c-k-c0x00ffffff-no-rj"
-                                    title={video.snippet.title}
-                                    text={video.snippet.channelTitle}
+                                    video={video}
                                     id={video.id}
-
                                 />
                             </div>)
                         })
