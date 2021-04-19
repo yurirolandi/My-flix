@@ -5,6 +5,10 @@
     font-family: sans-serif;
 }
 
+body {
+    background: #f9f9f9;
+}
+
 :root {
     --background: #fff;
     --background-hover: #e5e5e5;
@@ -28,6 +32,5 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background: #f9f9f9;
     overflow: hidden;
 }
