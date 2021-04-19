@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import useGet from '../../hook/useGet';
+import React, { ChangeEvent, useRef, useState, useEffect } from "react";
+
 import Keyboard from "react-simple-keyboard";
 import Sidebar from '../../components/Sidebar/Sidebar';
 import CardVideo from '../../components/CardVideo/CardVideo';
@@ -14,15 +14,20 @@ function Search() {
     const keyboard = useRef<any>();
     const [search, setSearch] = useState([]);
     const [keyOn, setkeyOn] = useState(true);
+    const [video, setVideo] = useState([]);
 
-    const video = useGet('/videos', {
-        params: {
-            part: 'snippet',
-            chart: 'mostPopular',
-            regionCode: 'BR',
-            maxResults: 20
-        }
-    });
+    useEffect(() => {
+        requestApi.get('/videos', {
+            params: {
+                part: 'snippet',
+                chart: 'mostPopular',
+                regionCode: 'BR',
+                maxResults: 20
+            }
+        }).then((response) => {
+            setVideo(response.data.items)
+        })
+    }, []);
 
     const onChange = (input: string) => {
         setInput(input);
@@ -95,15 +100,15 @@ function Search() {
                                     logo="https://yt3.ggpht.com/ytc/AAUvwninj1E2MC-2aA4iQ3H68k3NvsHDjY36yQhMIJnD=s68-c-k-c0x00ffffff-no-rj"
                                     title={video.snippet.title}
                                     text="Descrição"
-                                    id={video.id}       
+                                    id={video.id}
                                 />
                             </div>
                         )
                     })
                     }
                     {
-                        search.length === 0 && video.data.length > 0 && video.data.length > 0 &&
-                        video.data.map((video: any, index: number) => {
+                        search.length === 0 &&  video.length > 0 &&
+                        video.map((video: any, index: number) => {
 
                             return (<div className="coluna" key={index}>
                                 <CardVideo
@@ -111,7 +116,7 @@ function Search() {
                                     logo="https://yt3.ggpht.com/ytc/AAUvwninj1E2MC-2aA4iQ3H68k3NvsHDjY36yQhMIJnD=s68-c-k-c0x00ffffff-no-rj"
                                     title={video.snippet.title}
                                     text={video.snippet.channelTitle}
-                                    id={video.id}       
+                                    id={video.id}
                                 />
                             </div>)
                         })
