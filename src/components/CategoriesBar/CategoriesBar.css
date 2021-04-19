@@ -1,7 +1,6 @@
 .categoriesBar {
     display: flex;
     flex-shrink: 0;
-    
     overflow: hidden;
     background-color: white;
     z-index: 10;
@@ -20,10 +19,12 @@
     padding: 1rem;
     cursor: pointer;
 }
-.arrow:first-child{
+
+.arrow:first-child {
     border-right: 1px solid #d9d9d9;
 }
-.arrow:last-child{
+
+.arrow:last-child {
     border-left: 1px solid #d9d9d9;
 }
 
@@ -52,4 +53,19 @@
     background-color: #606060;
     color: white;
     border: 1px solid #565656;
+}
+
+.categoriesBar__items {
+    display: flex;
+    flex: 1 0 auto;
+    position: relative;
+    transition: .3s cubic-bezier(.25, .8, .5, 1);
+    white-space: nowrap;
+}
+
+.categoriesBar__wrapper {
+    contain: content;
+    display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
 }
