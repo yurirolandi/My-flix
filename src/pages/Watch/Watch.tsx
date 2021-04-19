@@ -15,6 +15,7 @@ function Watch() {
     const [galleryVideos, setGalleryVideos] = useState([]);
     const [comment, setComment] = useState([]);
     const [favorites, setFavorites] = useState([] as Array<number>);
+    const [activeElement, setActiveElement] = useState(false)
 
     useEffect(() => {
         requestApi.get('/videos', {
@@ -45,19 +46,23 @@ function Watch() {
             setGalleryVideos(response.data.items)
         })
     }, [id])
+    
 
     function handleFavorite(video: any) {
         let array = favorites;
         let addArray = true;
 
-        array.map((item: any) => {
-            if (item.id === video.id) {                
+        array.map((item: any, index: number) => {
+            if (item.id === video.id) {  
+                array.splice(index, 1);              
                 addArray = false;
+                setActiveElement(false);
                 return;
             };
         });
         if (addArray) {
             array.push(video)
+            setActiveElement(true);
         }
         setFavorites([...array])
 
@@ -109,7 +114,7 @@ function Watch() {
                                             <div className="info-likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <span onClick={() => handleFavorite(video)}><FaHeart /> <p>Favoritar</p></span>
+                                                <span onClick={() => handleFavorite(video)}><FaHeart className={activeElement  ? 'active' : ''} /> <p>Favoritar</p></span>
                                             </div>
                                         </div>
                                     )

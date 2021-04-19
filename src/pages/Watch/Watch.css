@@ -56,3 +56,6 @@
 .info-likeds span p {
     margin-left: 0.5rem;
 }
+svg.active {
+    color: red;
+}

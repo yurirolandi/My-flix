@@ -36,11 +36,6 @@ export default function CategoriesBar() {
         }
     }
 
-    function handleClick(value: string) {        
-        setActiveElement(value)
-    }
-
-
     return (
         <div className='categoriesBar'>
             <div className="categoriesBar__container">
@@ -53,7 +48,7 @@ export default function CategoriesBar() {
 
                             <div
                                 key={index}
-                                onClick={() => handleClick(value)}
+                                onClick={() => setActiveElement(value)}
                                 className={activeElement === value ? 'categories active' : 'categories'}
                             >
                                 {value}
