@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from '../../components/Sidebar/Sidebar';
-import Header from '../../components/Header/Header';
-import CategoriesBar from '../../components/CategoriesBar/CategoriesBar';
-import CardVideo from '../../components/CardVideo/CardVideo';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
+import CategoriesBar from '../../components/CategoriesBar';
+import CardVideo from '../../components/CardVideo';
 import requestApi from '../../services/api';
 
 function Home() {

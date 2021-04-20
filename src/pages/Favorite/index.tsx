@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from '../../components/Header/Header';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import CardVideo from '../../components/CardVideo/CardVideo';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import CardVideo from '../../components/CardVideo';
 import { FaHeart } from "react-icons/fa";
 import './Favorite.css';
 

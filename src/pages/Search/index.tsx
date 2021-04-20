@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useRef, useState, useEffect } from "react";
 
 import Keyboard from "react-simple-keyboard";
-import Sidebar from '../../components/Sidebar/Sidebar';
-import CardVideo from '../../components/CardVideo/CardVideo';
-import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar';
+import CardVideo from '../../components/CardVideo';
+import Header from '../../components/Header';
 import requestApi from '../../services/api';
 import { FaKeyboard, FaSearch } from "react-icons/fa";
 import './Search.css';

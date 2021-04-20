@@ -24,16 +24,16 @@ export default function CategoriesBar() {
     function arrowLeft() {
 
         if (value === -600) return;
-        if (value === value) {
-            setValue(value + -200)
-        }
+
+        setValue(value + -200)
+
     }
 
     function arrowRight() {
         if (value === 0) return;
-        if (value === value) {
-            setValue(value + 200)
-        }
+
+        setValue(value + 200)
+
     }
 
     return (

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from  '../../components/Sidebar/Sidebar';
-import Header from '../../components/Header/Header';
-import Comment from '../../components/Comment/Comment';
-import VideoGallery from '../../components/VideoGallery/VideoGallery';
+import Sidebar from  '../../components/Sidebar';
+import Header from '../../components/Header';
+import Comment from '../../components/Comment';
+import VideoGallery from '../../components/VideoGallery';
 import requestApi from '../../services/api';
 import { useParams } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
-import './Watch.css';
+import './MediaPlayer.css';
 
 
 function Watch() {
