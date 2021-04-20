@@ -40,6 +40,11 @@
                 transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
                 white-space: nowrap;
 
+                .focusable.box {
+                    padding: 0 10px;
+                    display: flex;
+                }
+
                 .categories {
                     height: 32px;
                     min-width: 114px;

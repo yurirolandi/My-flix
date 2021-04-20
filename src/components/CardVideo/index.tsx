@@ -1,6 +1,8 @@
 import react, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import requestApi from '../../services/api';
+import { youtubeServices } from '../../services/youtube';
+// @ts-ignore
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import './CardVideo.scss';
 
 interface CardField {
@@ -25,14 +27,11 @@ export default function CardVideo(props: CardField) {
     const history = useHistory();
 
     useEffect(() => {
-        requestApi.get('/channels', {
-            params: {
-                part: 'snippet',
-                id: props.video.snippet.channelId
-            }
-        }).then((response) => {
-            setIconChannel(response.data.items[0].snippet.thumbnails.default)
-        })
+
+        (async function () {
+            const popularVideos = await youtubeServices.getChannels(props.video.snippet.channelId);
+            setIconChannel(popularVideos);
+        }());
     }, []);
 
 
@@ -41,25 +40,27 @@ export default function CardVideo(props: CardField) {
     }
 
     return (
-        <>
-            <div className="card" onClick={handleVideoClick}>
-                <div className="card-content">
-                    <div className="card-content__header">
-                        <img src={props.video.snippet.thumbnails.high.url} alt="" />
-                    </div>
-                    <div className="card-content__footer">
-                        <div className="card-footer">
-                            <div className="card-footer__logo">
-                                <img src={iconChannel?.url} alt="" />
-                            </div>
-                            <div className="card-footer__text">
-                                <h3>{props.video.snippet.title}</h3>
-                                <p>{props.video.snippet.channelTitle}</p>
+        <SpatialNavigation>
+            <Focusable onClickEnter={handleVideoClick}>
+                <div className="card">
+                    <div className="card-content">
+                        <div className="card-content__header">
+                            <img src={props.video.snippet.thumbnails.high.url} alt="" />
+                        </div>
+                        <div className="card-content__footer">
+                            <div className="card-footer">
+                                <div className="card-footer__logo">
+                                    <img src={iconChannel?.url} alt="" />
+                                </div>
+                                <div className="card-footer__text">
+                                    <h3>{props.video.snippet.title}</h3>
+                                    <p>{props.video.snippet.channelTitle}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </>
+            </Focusable>
+        </SpatialNavigation>
     );
 }
