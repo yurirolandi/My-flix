@@ -3,10 +3,12 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
 import { FaHeart } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
 import './Favorite.scss';
 
 function Favorite() {
     const [favorite, setFavorite] = useState([]);
+    const notify = (text: string) => toast.success(text);
 
     useEffect(() => {
         const store = localStorage.getItem('favorites');
@@ -22,6 +24,7 @@ function Favorite() {
                 array.splice(index, 1);
                 setFavorite([...array])
                 localStorage.setItem('favorites', JSON.stringify(array));
+                notify("Video removido como favorito com sucesso!");
             };
         })
     }
@@ -49,6 +52,7 @@ function Favorite() {
                             }) : <h1>Você não tem nenhum video como favorito!</h1>
                     }
                 </div>
+                <ToastContainer />
             </div>
         </>
     );

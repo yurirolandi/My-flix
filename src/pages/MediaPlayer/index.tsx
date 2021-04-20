@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from  '../../components/Sidebar';
+import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Comment from '../../components/Comment';
 import VideoGallery from '../../components/VideoGallery';
 import requestApi from '../../services/api';
 import { useParams } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
 import './MediaPlayer.scss';
 
 
@@ -15,7 +16,9 @@ function Watch() {
     const [galleryVideos, setGalleryVideos] = useState([]);
     const [comment, setComment] = useState([]);
     const [favorites, setFavorites] = useState([] as Array<number>);
-    const [activeElement, setActiveElement] = useState(false)
+    const [activeElement, setActiveElement] = useState(false);
+
+    const notify = (text: string) => toast.success(text);
 
     useEffect(() => {
         requestApi.get('/videos', {
@@ -46,27 +49,29 @@ function Watch() {
             setGalleryVideos(response.data.items)
         })
     }, [id])
-    
+
 
     function handleFavorite(video: any) {
         let array = favorites;
         let addArray = true;
 
         array.map((item: any, index: number) => {
-            if (item.id === video.id) {  
-                array.splice(index, 1);              
+            if (item.id === video.id) {                
+                array.splice(index, 1);
                 addArray = false;
                 setActiveElement(false);
+                localStorage.setItem('favorites', JSON.stringify(array));
+                notify("Video removido como favorito com sucesso!");
                 return;
             };
         });
         if (addArray) {
             array.push(video)
             setActiveElement(true);
+            setFavorites([...array])
+            localStorage.setItem('favorites', JSON.stringify(array));
+            notify("Video salvo como favorito com sucesso!");
         }
-        setFavorites([...array])
-
-       localStorage.setItem('favorites', JSON.stringify(array));
     }
 
     return (
@@ -114,7 +119,8 @@ function Watch() {
                                             <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <span onClick={() => handleFavorite(video)}><FaHeart className={activeElement  ? 'active' : ''} /> <p>Favoritar</p></span>
+                                                <span onClick={() => handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span>
+
                                             </div>
                                         </div>
                                     )
@@ -136,6 +142,7 @@ function Watch() {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
         </>
     );
