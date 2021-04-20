@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
 import { FaHeart } from "react-icons/fa";
-import './Favorite.css';
+import './Favorite.scss';
 
 function Favorite() {
     const [favorite, setFavorite] = useState([]);
@@ -42,7 +42,7 @@ function Favorite() {
                                         video={video}
                                         id={video.id}
                                     />
-                                    <div className="favorite">
+                                    <div className="coluna__favorite">
                                         <FaHeart color="red" onClick={() => removeFavorite(video)} />
                                     </div>
                                 </div>)

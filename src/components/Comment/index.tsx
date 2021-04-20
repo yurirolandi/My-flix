@@ -1,5 +1,5 @@
 import react from 'react';
-import './Comment.css';
+import './Comment.scss';
 interface CommentType {
     authorProfileImageUrl: string,
     authorDisplayName: string,
@@ -11,7 +11,7 @@ export default function Comment(props: CommentType) {
     return(
         <div className="comment">
             <img src={props.authorProfileImageUrl} />
-            <div className="comment-body">
+            <div className="comment__content">
                 <p>{props.authorDisplayName}</p>
                 <p>{props.textDisplay}</p>
             </div>

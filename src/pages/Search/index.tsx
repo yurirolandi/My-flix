@@ -6,7 +6,7 @@ import CardVideo from '../../components/CardVideo';
 import Header from '../../components/Header';
 import requestApi from '../../services/api';
 import { FaKeyboard, FaSearch } from "react-icons/fa";
-import './Search.css';
+import './Search.scss';
 
 function Search() {
     const [input, setInput] = useState("");
@@ -75,7 +75,7 @@ function Search() {
             <Header />
             <Sidebar />
             <div className="container">
-                <div className="container__form">
+                <div className="form">
                     <input type="text"
                         className="form__search"
                         placeholder="Pesquisar"
@@ -87,7 +87,7 @@ function Search() {
                         <FaKeyboard size={24} />
                     </div>
 
-                    <div className="header__button">
+                    <div className="form__button">
                         <button type='submit' onClick={handleSubmit}><FaSearch size={20} /></button>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ function Search() {
                         })
                     }
                 </div>
-                <div className={keyOn ? "container__keyboard" : "container__keyboard off"}>
+                <div className={keyOn ? "keyboard" : "keyboard off"}>
                     <Keyboard
                         keyboardRef={(r: any) => (keyboard.current = r)}
                         layoutName={layout}

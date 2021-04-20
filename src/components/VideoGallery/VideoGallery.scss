@@ -1,0 +1,31 @@
+@import "../../style/variables";
+
+.gallery {
+    &-container {
+        display: flex;
+        &__header {
+            width: 100%;
+            position: relative;
+            z-index: 5;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        &__footer {
+            margin-top: 7px;
+
+            .gallery-footer {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+
+                &__text {
+                    width: 14vw;
+                    padding-left: 1rem;
+                }
+            }
+        }
+    }
+}

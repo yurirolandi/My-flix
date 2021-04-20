@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import './CategoriesBar.css';
+import './CategoriesBar.scss';
 
 const categories = [
     'Tudo',
@@ -42,8 +42,8 @@ export default function CategoriesBar() {
                 <div className="arrow" onClick={() => arrowLeft()}>
                     <FaAngleLeft />
                 </div>
-                <div className="categoriesBar__wrapper">
-                    <div className="categoriesBar__items" style={{ transform: `translateX(${value}px)` }}>
+                <div className="categoriesBar-wrapper">
+                    <div className="categoriesBar-wrapper__items" style={{ transform: `translateX(${value}px)` }}>
                         {categories.map((value: string, index: number) => (
 
                             <div

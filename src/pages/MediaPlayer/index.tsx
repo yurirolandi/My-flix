@@ -6,7 +6,7 @@ import VideoGallery from '../../components/VideoGallery';
 import requestApi from '../../services/api';
 import { useParams } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
-import './MediaPlayer.css';
+import './MediaPlayer.scss';
 
 
 function Watch() {
@@ -74,8 +74,8 @@ function Watch() {
             <Header />
             <Sidebar />
             <div className="container">
-                <div className="watch-grid">
-                    <div className="watch-player">
+                <div className="media-grid">
+                    <div className="media-grid__player">
                         <iframe
                             src={`https://www.youtube.com/embed/${id}`}
                             frameBorder='0'
@@ -83,8 +83,8 @@ function Watch() {
                             width='100%'
                             height='100%'></iframe>
                     </div>
-                    <div className="watch-playlist">
-                        <div className="watch-playlist__container">
+                    <div className="media-grid__playlist">
+                        <div className="media-grid__container">
 
                             {galleryVideos.length > 0 && galleryVideos.map((video: any, index: number) => {
                                 return (
@@ -100,18 +100,18 @@ function Watch() {
                             })}
                         </div>
                     </div>
-                    <div className="whatch-information">
-                        <div className="whatch-information-video">
+                    <div className="media-grid__information">
+                        <div className="media-grid-information-video">
                             {
                                 videos.length > 0 && videos.map((video: any, index: number) => {
                                     return (
-                                        <div className="info" key={index}>
-                                            <div className="info-title">
+                                        <div className="information-box" key={index}>
+                                            <div className="information-box__title">
                                                 <h3>{video.snippet.channelTitle}</h3>
                                                 <p>{video.statistics.viewCount} visualizações</p>
                                                 <p>{video.statistics.commentCount} comentários</p>
                                             </div>
-                                            <div className="info-likeds">
+                                            <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
                                                 <span onClick={() => handleFavorite(video)}><FaHeart className={activeElement  ? 'active' : ''} /> <p>Favoritar</p></span>
@@ -121,7 +121,7 @@ function Watch() {
                                 })
                             }
                         </div>
-                        <div className="whatch-comments">
+                        <div className="media-comments">
                             {comment.length > 0 && comment.map((comments: any, index: number) => {
                                 return (
                                     <div key={index}>

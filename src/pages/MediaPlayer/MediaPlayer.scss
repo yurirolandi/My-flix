@@ -1,0 +1,64 @@
+@import "../../style/variables";
+
+.media-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    &__player {
+        height: 70vh;
+    }
+
+    &__playlist {
+        margin: 0 1rem;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        align-items: center;
+    }
+
+    &__information {
+        .information-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            &__title {
+                min-width: 200px;
+                padding: 1.5rem;
+                h3 {
+                    font-size: 1.7rem;
+                }
+                p {
+                    margin: 1rem 0;
+                    font-size: 1.2rem;
+                }
+            }
+
+            &__likeds {
+                min-width: 200px;
+                display: flex;
+                padding: 1.5rem;
+                justify-content: center;
+
+                span {
+                    margin-left: 1.5rem;
+                    cursor: pointer;
+                    display: flex;
+                    font-size: 1.5rem;
+
+                    p {
+                        margin-left: 0.5rem;
+                    }
+                    svg.active {
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaYoutube } from "react-icons/fa";
 import "react-simple-keyboard/build/css/index.css";
-import './Header.css';
+import './Header.scss';
 
 
 export default function Header() {

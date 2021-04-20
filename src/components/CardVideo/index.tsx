@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import requestApi from '../../services/api';
-import './CardVideo.css';
+import './CardVideo.scss';
 
 interface CardField {
     id: string,
@@ -44,15 +44,15 @@ export default function CardVideo(props: CardField) {
         <>
             <div className="card" onClick={handleVideoClick}>
                 <div className="card-content">
-                    <div className="card-header">
+                    <div className="card-content__header">
                         <img src={props.video.snippet.thumbnails.high.url} alt="" />
                     </div>
-                    <div className="card-footer">
-                        <div className="card-footer__container">
-                            <div className="card-logo">
+                    <div className="card-content__footer">
+                        <div className="card-footer">
+                            <div className="card-footer__logo">
                                 <img src={iconChannel?.url} alt="" />
                             </div>
-                            <div className="card-text">
+                            <div className="card-footer__text">
                                 <h3>{props.video.snippet.title}</h3>
                                 <p>{props.video.snippet.channelTitle}</p>
                             </div>

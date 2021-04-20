@@ -1,6 +1,6 @@
 import react from 'react';
 import { useHistory } from 'react-router-dom'
-import './VideoGallery.css'
+import './VideoGallery.scss'
 
 interface galleryField {
     thumb: string,
@@ -19,13 +19,13 @@ export default function VideoGallery( props : galleryField) {
     return (
         <>
             <div className="gallery" onClick={handleVideoClick}>
-                <div className="gallery-content">
-                    <div className="gallery-header">
+                <div className="gallery-container">
+                    <div className="gallery-container__header">
                         <img src={props.thumb} alt="" />
                     </div>
-                    <div className="gallery-footer">
-                        <div className="gallery-footer__container">
-                            <div className="gallery-text">
+                    <div className="gallery-container__footer">
+                        <div className="gallery-footer">
+                            <div className="gallery-footer__text">
                                 <h3>{props.title}</h3>
                                 <p>{props.text}</p>
                             </div>
