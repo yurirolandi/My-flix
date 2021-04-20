@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import YouTube from 'react-youtube';
+import { useParams } from 'react-router-dom';
+import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+// @ts-ignore
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
+import { youtubeServices } from '../../services/youtube';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Comment from '../../components/Comment';
 import VideoGallery from '../../components/VideoGallery';
-import requestApi from '../../services/api';
-import { useParams } from 'react-router-dom';
-import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
-import { ToastContainer, toast } from 'react-toastify';
 import './MediaPlayer.scss';
 
 
@@ -17,37 +20,34 @@ function Watch() {
     const [comment, setComment] = useState([]);
     const [favorites, setFavorites] = useState([] as Array<number>);
     const [activeElement, setActiveElement] = useState(false);
+    const [player, setPlayer] = useState<any>(null);
+    const [pause, setPause] = useState(false);
 
     const notify = (text: string) => toast.success(text);
 
-    useEffect(() => {
-        requestApi.get('/videos', {
-            params: {
-                part: 'snippet,statistics',
-                id: id,
-            }
-        }).then((response) => {
-            setVideos(response.data.items)
-        })
-        requestApi.get('/commentThreads', {
-            params: {
-                part: 'snippet',
-                videoId: id,
-            },
-        }).then((response) => {
-            setComment(response.data.items);
-        })
+    const opts: any = {
+        width: '100%',
+        height: '100%',
+        playerVars: {
+            autoplay: 1,
+        },
+    };
 
-        requestApi.get('/videos', {
-            params: {
-                part: 'snippet',
-                chart: 'mostPopular',
-                regionCode: 'BR',
-                maxResults: 20
-            }
-        }).then((response) => {
-            setGalleryVideos(response.data.items)
-        })
+
+    useEffect(() => {
+        (async function () {
+            const channel = youtubeServices.getChannelVideos(id);
+            const comment = youtubeServices.getComment(id);
+            const popularVideos = youtubeServices.getPopularVideos();
+
+
+            Promise.all([channel, comment, popularVideos]).then((data) => {
+                console.log('testango ', data);
+                setVideos(data[0]);
+                setComment(data[1]);
+                setGalleryVideos(data[2]);
+              });
+        }())
     }, [id])
 
 
@@ -56,7 +56,7 @@ function Watch() {
         let addArray = true;
 
         array.map((item: any, index: number) => {
-            if (item.id === video.id) {                
+            if (item.id === video.id) {
                 array.splice(index, 1);
                 addArray = false;
                 setActiveElement(false);
@@ -74,19 +74,34 @@ function Watch() {
         }
     }
 
+    function handlePlayer(event: any) {
+        setPlayer(event.target);
+    }
+
+    function onPlay() {
+        if (!pause) {
+            player.pauseVideo();
+            setPause(true)
+        } else {
+            player.playVideo();
+            setPause(false)
+        }
+
+    }
+
+
     return (
-        <>
+        <SpatialNavigation>
             <Header />
             <Sidebar />
             <div className="container">
                 <div className="media-grid">
                     <div className="media-grid__player">
-                        <iframe
-                            src={`https://www.youtube.com/embed/${id}`}
-                            frameBorder='0'
-                            allowFullScreen
-                            width='100%'
-                            height='100%'></iframe>
+                        <Focusable onClickEnter={() => {
+                            onPlay();
+                        }}>
+                            <YouTube videoId={`${id}`} opts={opts} onReady={handlePlayer} />
+                        </Focusable>
                     </div>
                     <div className="media-grid__playlist">
                         <div className="media-grid__container">
@@ -119,7 +134,7 @@ function Watch() {
                                             <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <span onClick={() => handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span>
+                                                <Focusable onClickEnter={() => handleFavorite(video)}><span><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span></Focusable>
 
                                             </div>
                                         </div>
@@ -144,7 +159,7 @@ function Watch() {
                 </div>
                 <ToastContainer />
             </div>
-        </>
+        </SpatialNavigation>
     );
 }
 export default Watch;

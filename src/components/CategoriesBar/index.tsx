@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+// @ts-ignore
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import './CategoriesBar.scss';
 
 const categories = [
@@ -37,30 +39,34 @@ export default function CategoriesBar() {
     }
 
     return (
-        <div className='categoriesBar'>
-            <div className="categoriesBar__container">
-                <div className="arrow" onClick={() => arrowLeft()}>
-                    <FaAngleLeft />
-                </div>
-                <div className="categoriesBar-wrapper">
-                    <div className="categoriesBar-wrapper__items" style={{ transform: `translateX(${value}px)` }}>
-                        {categories.map((value: string, index: number) => (
+        <SpatialNavigation>
+            <div className='categoriesBar'>
+                <div className="categoriesBar__container">
+                    <div className="arrow" onClick={() => arrowLeft()}>
+                        <FaAngleLeft />
+                    </div>
+                    <div className="categoriesBar-wrapper">
+                        <div className="categoriesBar-wrapper__items" style={{ transform: `translateX(${value}px)` }}>
+                            {categories.map((value: string, index: number) => (
 
-                            <div
-                                key={index}
-                                onClick={() => setActiveElement(value)}
-                                className={activeElement === value ? 'categories active' : 'categories'}
-                            >
-                                {value}
-                            </div>
+                                <Focusable className="box">
+                                    <div
+                                        key={index}
+                                        onClick={() => setActiveElement(value)}
+                                        className={activeElement === value ? 'categories active' : 'categories'}
+                                    >
+                                        {value}
+                                    </div>
+                                </Focusable>
 
-                        ))}
+                            ))}
+                        </div>
+                    </div>
+                    <div className="arrow" onClick={() => arrowRight()}>
+                        <FaAngleRight />
                     </div>
                 </div>
-                <div className="arrow" onClick={() => arrowRight()}>
-                    <FaAngleRight />
-                </div>
             </div>
-        </div>
+        </SpatialNavigation>
     )
 }

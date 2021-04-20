@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+// @ts-ignore
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
@@ -30,7 +32,7 @@ function Favorite() {
     }
 
     return (
-        <>
+        <SpatialNavigation>
             <Header />
             <Sidebar />
             <div className="container">
@@ -46,7 +48,7 @@ function Favorite() {
                                         id={video.id}
                                     />
                                     <div className="coluna__favorite">
-                                        <FaHeart color="red" onClick={() => removeFavorite(video)} />
+                                       <Focusable onClickEnter={() => removeFavorite(video)}> <FaHeart color="red" /></Focusable>
                                     </div>
                                 </div>)
                             }) : <h1>Você não tem nenhum video como favorito!</h1>
@@ -54,7 +56,7 @@ function Favorite() {
                 </div>
                 <ToastContainer />
             </div>
-        </>
+        </SpatialNavigation>
     );
 }
 export default Favorite;
