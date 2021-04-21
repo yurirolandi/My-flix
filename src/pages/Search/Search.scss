@@ -1,40 +1,101 @@
 @import "../../style/variables";
 
-.form {
-    display: flex;
+.header-form {
+    position: sticky;
+    z-index: 10;
+    top: 80px;
+    width: 100%;
     background: white;
-    width: 25vw;
-    min-width: 300px;
-    padding: 0 0 0 0.5rem;
-    border-radius: 0.2rem;
-    border: 1px solid $border;
-    margin: 0 auto;
-
-    &__search {
-        border: none;
-        padding: 0.5rem;
-        width: 100%;
-        font-size: 1rem;
-        &:focus {
-            outline: none;
+    padding-bottom: 1rem;
+    .form {
+        display: flex;
+        width: 25vw;
+        min-width: 300px;
+        padding: 0 0 0 0.5rem;
+        border-radius: 0.2rem;
+        border: 1px solid $border;
+        margin: 0 auto;
+        .focusable {
+            width: 100%;
         }
-    }
 
-    &__icon {
-        margin-top: 4px;
-        cursor: pointer;
+        &__search {
+            border: none;
+            padding: 0.5rem;
+            width: 100%;
+            font-size: 1rem;
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &__icon {
+            margin-top: 4px;
+            cursor: pointer;
+        }
+        &__button {
+            margin-left: 1rem;
+
+            button {
+                height: 33px;
+                border: navajowhite;
+                padding: 0 1rem;
+                font-size: 0.5em;
+                border-left: 1px solid $border;
+            }
+        }
     }
 }
 
 
 .keyboard {
-    width: 45vw;
-    position: sticky;
+    position: fixed;
+    left: 0;
     bottom: 0;
-    left: 200px;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    padding: 0.5rem 0;
+    background: $background-black;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    user-select: none;
+    transition: bottom 0.4s;
     z-index: 10;
-    &.off {
-        display: none;
+    .focusable {
+        display: initial;
     }
+    &.keyboard--hidden {
+        bottom: -100%;
+    }
+
+    &-keys {
+        text-align: center;
+        margin-top: 1.5rem;
+        &__container{
+            .keyboard-key {
+                height: 45px;
+                width: 6%;
+                max-width: 90px;
+                margin: 0.5rem;
+                border-radius: 4px;
+                border: none;
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                font-size: 1.1rem;
+                outline: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                vertical-align: top;
+                padding: 0;
+                -webkit-tap-highlight-color: transparent;
+                position: relative;
+                &:active {
+                    background: rgba(255, 255, 255, 0.12);
+                }             
+                   
+            }
+        }
+    }
+
+   
 }

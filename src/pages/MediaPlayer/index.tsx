@@ -42,7 +42,6 @@ function Watch() {
 
 
             Promise.all([channel, comment, popularVideos]).then((data) => {
-                console.log('testango ', data);
                 setVideos(data[0]);
                 setComment(data[1]);
                 setGalleryVideos(data[2]);
