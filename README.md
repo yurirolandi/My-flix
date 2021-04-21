@@ -7,8 +7,7 @@ Crie uma aplicação utilizando Reactjs em que a navegação seja toda por tecla
 ## Desafio
 
 - Consumir a API do YouTube
-- Realize as seguintes 
-    operações:
+- Realize as seguintes operações:
     -Listar os vídeos.
     -Buscar.
     -Reproduzir o vídeo selecionado.
