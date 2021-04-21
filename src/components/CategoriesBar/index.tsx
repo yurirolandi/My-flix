@@ -49,9 +49,9 @@ export default function CategoriesBar() {
                         <div className="categoriesBar-wrapper__items" style={{ transform: `translateX(${value}px)` }}>
                             {categories.map((value: string, index: number) => (
 
-                                <Focusable className="box">
+                                <Focusable className="box"  key={index}>
                                     <div
-                                        key={index}
+                                       
                                         onClick={() => setActiveElement(value)}
                                         className={activeElement === value ? 'categories active' : 'categories'}
                                     >

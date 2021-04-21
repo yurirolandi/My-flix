@@ -54,7 +54,7 @@ function Watch() {
         let array = favorites;
         let addArray = true;
 
-        array.map((item: any, index: number) => {
+        array.forEach((item: any, index: number) => {
             if (item.id === video.id) {
                 array.splice(index, 1);
                 addArray = false;

@@ -32,7 +32,7 @@ export default function CardVideo(props: CardField) {
             const popularVideos = await youtubeServices.getChannels(props.video.snippet.channelId);
             setIconChannel(popularVideos);
         }());
-    }, []);
+    }, [props.video.snippet.channelId]);
 
 
     const handleVideoClick = () => {
