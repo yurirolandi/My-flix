@@ -33,7 +33,7 @@ function Search() {
         }())
     }, []);
 
-    const onChangeInput = (event: string|any) => {
+    const onChangeInput = (event: string | any) => {
 
         let stateNow = input;
         if (event.type === 'change') {
@@ -63,8 +63,10 @@ function Search() {
     }
 
     const handleSubmit = () => {
-        SearchVideos(input)
-        setkeyOn(false)
+        if (input.trim()) {
+            SearchVideos(input)
+            setkeyOn(false)
+        }
     }
 
     return (
@@ -84,12 +86,12 @@ function Search() {
                         </Focusable>
 
 
-                        <div className="form__icon" onClick={() => setkeyOn(true)}>
-                            <Focusable> <FaKeyboard size={24} /> </Focusable>
+                        <div className="form__icon">
+                            <Focusable onClickEnter={() => setkeyOn(true)}> <FaKeyboard size={24} /> </Focusable>
                         </div>
 
                         <div className="form__button">
-                            <Focusable> <button type='submit' onClick={handleSubmit}><FaSearch size={20} /></button></Focusable>
+                            <Focusable onClickEnter={handleSubmit}> <button type='submit'><FaSearch size={20} /></button></Focusable>
                         </div>
                     </div>
                 </div>
@@ -124,7 +126,7 @@ function Search() {
                         <div className="keyboard-keys__container">
                             {keyLetter[0].map((items: string, index: number) => {
                                 return (
-                                    <Focusable onClickEnter={() => onChangeInput(items)} key={index}>
+                                    <Focusable onFocus={items} onClickEnter={() => onChangeInput(items)} key={index}>
                                         <button type="button"
                                             value={items}
                                             className="keyboard-key"
