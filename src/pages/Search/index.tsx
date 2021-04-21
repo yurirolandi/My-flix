@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useRef, useState, useEffect, ChangeEventHandler, ButtonHTMLAttributes } from "react";
+import React, { useState, useEffect } from "react";
 
-// import Keyboard from "react-simple-keyboard";
 import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
 import Header from '../../components/Header';
@@ -34,11 +33,12 @@ function Search() {
     }, []);
 
     const onChangeInput = (event: string | any) => {
-
         let stateNow = input;
         if (event.type === 'change') {
-            setInput(event.target.value)
+            setInput(event.target.value);
+            return;
         }
+
         switch (event) {
             case 'ENTER':
                 handleSubmit();
@@ -54,6 +54,9 @@ function Search() {
         }
         if (event === 'SPACE' || event === 'BACKSPACE' || event === 'ENTER') return
         setInput(stateNow += event);
+
+
+
     };
 
     async function SearchVideos(value: string) {
@@ -76,14 +79,13 @@ function Search() {
             <div className="container">
                 <div className="header-form">
                     <div className="form">
-                        <Focusable>
-                            <input type="text"
-                                className="form__search"
-                                placeholder="Pesquisar"
-                                value={input}
-                                onChange={onChangeInput}
-                            />
-                        </Focusable>
+                        <input type="text"
+                            className="form__search"
+                            placeholder="Pesquisar"
+                            value={input}
+                            onChange={onChangeInput}
+                            data-testid="form__search"
+                        />
 
 
                         <div className="form__icon">
@@ -91,7 +93,9 @@ function Search() {
                         </div>
 
                         <div className="form__button">
-                            <Focusable onClickEnter={handleSubmit}> <button type='submit'><FaSearch size={20} /></button></Focusable>
+                            <Focusable onClickEnter={handleSubmit}>
+                                <button type='submit' data-testid="form__btn" onClick={handleSubmit}><FaSearch size={20} /></button>
+                            </Focusable>
                         </div>
                     </div>
                 </div>
@@ -140,11 +144,10 @@ function Search() {
                         <div className="keyboard-keys__container">
                             {keyLetter[1].map((items: string, index: number) => {
                                 return (
-                                    <Focusable onClickEnter={() => onChangeInput(items)}>
+                                    <Focusable onClickEnter={() => onChangeInput(items)} key={index}>
                                         <button type="button"
                                             value={items}
                                             className="keyboard-key"
-                                            key={index}
                                         >{items}
                                         </button>
                                     </Focusable>
@@ -155,12 +158,11 @@ function Search() {
                         <div className="keyboard-keys__container">
                             {keyLetter[2].map((items: string, index: number) => {
                                 return (
-                                    <Focusable onClickEnter={() => onChangeInput(items)}>
+                                    <Focusable onClickEnter={() => onChangeInput(items)} key={index}>
                                         <button
                                             type="button"
                                             value={items}
                                             className="keyboard-key"
-                                            key={index}
                                         >{items}
                                         </button>
                                     </Focusable>
@@ -171,11 +173,10 @@ function Search() {
                         <div className="keyboard-keys__container">
                             {keyLetter[3].map((items: string, index: number) => {
                                 return (
-                                    <Focusable onClickEnter={() => onChangeInput(items)}>
+                                    <Focusable onClickEnter={() => onChangeInput(items)} key={index}>
                                         <button type="button"
                                             value={items}
                                             className="keyboard-key"
-                                            key={index}
                                         >{items}
                                         </button>
                                     </Focusable>

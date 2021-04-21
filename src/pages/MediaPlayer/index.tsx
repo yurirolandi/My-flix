@@ -24,6 +24,7 @@ function Watch() {
     const [pause, setPause] = useState(false);
 
     const notify = (text: string) => toast.success(text);
+    const notifyError = (text: string) => toast.error(text);
 
     const opts: any = {
         width: '100%',
@@ -50,11 +51,15 @@ function Watch() {
     }, [id])
 
 
-    function handleFavorite(video: any) {
+    function handleFavorite(video: any = null) {
         let array = favorites;
         let addArray = true;
 
-        array.forEach((item: any, index: number) => {
+        array.map((item: any, index: number) => {
+            if(video.id === null){
+                notifyError("Não foi possivel adicionar como favorito");
+                setActiveElement(false);
+            }
             if (item.id === video.id) {
                 array.splice(index, 1);
                 addArray = false;
@@ -105,7 +110,7 @@ function Watch() {
                     <div className="media-grid__playlist">
                         <div className="media-grid__container">
 
-                            {galleryVideos.length > 0 && galleryVideos.map((video: any, index: number) => {
+                            {galleryVideos.length > 0 ? galleryVideos.map((video: any, index: number) => {
                                 return (
                                     <div key={index}>
                                         <VideoGallery
@@ -116,13 +121,14 @@ function Watch() {
                                         />
                                     </div>
                                 )
-                            })}
+                            }) : <p>Ops, Houve um erro</p>
+                            }
                         </div>
                     </div>
                     <div className="media-grid__information">
                         <div className="media-grid-information-video">
                             {
-                                videos.length > 0 && videos.map((video: any, index: number) => {
+                                videos.length > 0 ? videos.map((video: any, index: number) => {
                                     return (
                                         <div className="information-box" key={index}>
                                             <div className="information-box__title">
@@ -138,7 +144,21 @@ function Watch() {
                                             </div>
                                         </div>
                                     )
-                                })
+                                }) : (
+                                    <div className="information-box">
+                                        <div className="information-box__title">
+                                            <h3>Titulo indisponível</h3>
+                                            <p>visualizações indisponíves</p>
+                                            <p>comentários indisponíves</p>
+                                        </div>
+                                        <div className="information-box__likeds">
+                                            <span><FaThumbsUp /> <p>indisponível </p></span>
+                                            <span><FaThumbsDown /> <p>indisponível </p></span>
+                                            <Focusable onClickEnter={() => handleFavorite()}><span><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span></Focusable>
+
+                                        </div>
+                                    </div>
+                                )
                             }
                         </div>
                         <div className="media-comments">
