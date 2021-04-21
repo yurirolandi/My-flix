@@ -1,4 +1,3 @@
-# Storm teste
 
 # Objetivo
 
