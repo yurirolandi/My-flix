@@ -8,10 +8,10 @@ Crie uma aplicação utilizando Reactjs em que a navegação seja toda por tecla
 
 - Consumir a API do YouTube
 - Realize as seguintes operações:
-    -Listar os vídeos.
-    -Buscar.
-    -Reproduzir o vídeo selecionado.
-    -Selecionar vídeos como favoritos.
+    - Listar os vídeos.
+    - Buscar.
+    - Reproduzir o vídeo selecionado.
+    - Selecionar vídeos como favoritos.
 
 - Gerenciar os videos marcados como favorito podendo: 
     - Adicionar, remover e assistir os vídeos marcados como favorito.
