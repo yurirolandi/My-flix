@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, fireEvent, screen } from '@testing-library/react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
 import Search from '../pages/Search';
 
 describe('Teste Search Component', () => {
