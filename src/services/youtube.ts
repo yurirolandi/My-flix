@@ -41,7 +41,7 @@ export const youtubeServices = {
                 q: value,
                 type: 'video',
             }
-        }).then(response => {
+        }).then((response) => {
             return response.data.items
         })
     },
