@@ -121,7 +121,18 @@ function Watch() {
                                         />
                                     </div>
                                 )
-                            }) : <p>Ops, Houve um erro</p>
+                            }) : [10].map((index: number) => {
+                                return (
+                                    <div key={index}>
+                                        <VideoGallery
+                                            thumb='https://media.istockphoto.com/vectors/loading-icon-template-update-or-loading-symbol-for-web-or-application-vector-id1163484671'
+                                            title='Op´s, Vido indisponível'
+                                            text=''
+                                            id=''
+                                        />
+                                    </div>
+                                )
+                            })
                             }
                         </div>
                     </div>
@@ -139,7 +150,7 @@ function Watch() {
                                             <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <Focusable onClickEnter={() => handleFavorite(video)}><span><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span></Focusable>
+                                                <Focusable onClickEnter={() => handleFavorite(video)}><button data-testid="btn-favorito" onClick={() =>handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></button></Focusable>
 
                                             </div>
                                         </div>
@@ -152,7 +163,7 @@ function Watch() {
                                             <p>comentários indisponíves</p>
                                         </div>
                                         <div className="information-box__likeds">
-                                            <span><FaThumbsUp /> <p>indisponível </p></span>
+                                            <span><FaThumbsUp /> <p> indisponível </p></span>
                                             <span><FaThumbsDown /> <p>indisponível </p></span>
                                             <Focusable onClickEnter={() => handleFavorite()}><span><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span></Focusable>
 
@@ -162,7 +173,7 @@ function Watch() {
                             }
                         </div>
                         <div className="media-comments">
-                            {comment.length > 0 && comment.map((comments: any, index: number) => {
+                            {comment.length > 0 ? comment.map((comments: any, index: number) => {
                                 return (
                                     <div key={index}>
                                         <Comment key={index}
@@ -172,7 +183,8 @@ function Watch() {
                                         />
                                     </div>
                                 )
-                            })}
+                            }) : <h4>Comentário indisponível</h4>
+                        }
                         </div>
                     </div>
                 </div>

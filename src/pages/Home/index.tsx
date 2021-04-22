@@ -28,7 +28,7 @@ function Home() {
 
                 <div className="container__grid">
                     {
-                        video.length > 0 &&
+                        video.length > 0 ?
                         video.map((video: any, index: number) => {
 
                             return (<div className="coluna" key={index}>
@@ -39,7 +39,7 @@ function Home() {
                                 />
 
                             </div>)
-                        })
+                        }) : <h1>Op´s, ocorreu algum erro!</h1>
                     }
 
                 </div>

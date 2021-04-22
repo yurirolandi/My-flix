@@ -20,7 +20,7 @@ function Favorite() {
 
     function removeFavorite(video: any) {
         let array = favorite;
-        
+
         array.map((item: any, index: number) => {
             if (item.id === video.id) {
                 array.splice(index, 1);
@@ -48,7 +48,12 @@ function Favorite() {
                                         id={video.id}
                                     />
                                     <div className="coluna__favorite">
-                                       <Focusable onClickEnter={() => removeFavorite(video)}> <FaHeart color="red" /></Focusable>
+                                        <Focusable onClickEnter={() => removeFavorite(video)}>
+                                            <button data-testid="removefavorito"
+                                                onClick={() => removeFavorite(video)}>
+                                                <FaHeart color="red" />
+                                            </button>
+                                        </Focusable>
                                     </div>
                                 </div>)
                             }) : <h1>Você não tem nenhum video como favorito!</h1>
