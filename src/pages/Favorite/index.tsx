@@ -51,7 +51,7 @@ function Favorite() {
                                         <Focusable onClickEnter={() => removeFavorite(video)}>
                                             <button data-testid="removefavorito"
                                                 onClick={() => removeFavorite(video)}>
-                                                <FaHeart color="red" />
+                                                <FaHeart color="red" size={24} />
                                             </button>
                                         </Focusable>
                                     </div>
