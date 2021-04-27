@@ -6,7 +6,9 @@ import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
 import { FaHeart } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
+import { ListaVideos, VideoFavoritoId } from '../../components/types/video.interface';
 import './Favorite.scss';
+
 
 function Favorite() {
     const [favorite, setFavorite] = useState([]);
@@ -18,10 +20,10 @@ function Favorite() {
         setFavorite(JSON.parse(store))
     }, []);
 
-    function removeFavorite(video: any) {
+    function removeFavorite(video: VideoFavoritoId) {
         let array = favorite;
 
-        array.map((item: any, index: number) => {
+        array.forEach((item: VideoFavoritoId, index: number) => {
             if (item.id === video.id) {
                 array.splice(index, 1);
                 setFavorite([...array])
@@ -40,7 +42,7 @@ function Favorite() {
 
                     {
                         favorite.length > 0 ?
-                            favorite.map((video: any, index: number) => {
+                            favorite.map((video: ListaVideos, index: number) => {
 
                                 return (<div className="coluna" key={index}>
                                     <CardVideo

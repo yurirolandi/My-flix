@@ -18,13 +18,19 @@
 
     &__playlist {
         margin: 0 1rem;
+        position: relative;
     }
     &__container {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        position: absolute;
         align-items: center;
+        position: absolute;
+        width: 100%;
+
+        .coluna{
+            width: 100%;
+        }
     }
 
     &__information {
@@ -51,7 +57,8 @@
                 padding: 1.5rem;
                 justify-content: center;
 
-                span, button {
+                span,
+                button {
                     border: none;
                     background: none;
                     margin-left: 1.5rem;

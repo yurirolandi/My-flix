@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 import Sidebar from '../../components/Sidebar';
 import CardVideo from '../../components/CardVideo';
@@ -7,30 +7,25 @@ import { youtubeServices } from '../../services/youtube';
 import { FaKeyboard, FaSearch, FaArrowLeft } from "react-icons/fa";
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
+import { appContext } from "../../store";
+import {ListaVideos} from '../../components/types/video.interface'
 import './Search.scss';
+
 
 
 function Search() {
     const [input, setInput] = useState("");
     const [search, setSearch] = useState([]);
     const [keyOn, setkeyOn] = useState(true);
-    const [video, setVideo] = useState([]);
+    const {video} = useContext(appContext)
 
-
+     
     const keyLetter = [
         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "BACKSPACE"],
         ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ENTER"],
         ["z", "x", "c", "v", "b", "n", "m", ",", "."],
         ["SPACE"]
     ];
-
-
-    useEffect(() => {
-        (async function () {
-            const popularVideos = await youtubeServices.getPopularVideos();
-            setVideo(popularVideos);
-        }())
-    }, []);
 
     const onChangeInput = (event: string | any) => {
         let stateNow = input;
@@ -43,24 +38,20 @@ function Search() {
             case 'ENTER':
                 handleSubmit();
                 setInput('');
-                break;
+                return;
             case 'SPACE':
                 setInput(stateNow += ' ');
-                break;
+                return;
             case 'BACKSPACE':
                 setInput(input.substring(0, input.length - 1));
-                break;
+                return;
 
         }
-        if (event === 'SPACE' || event === 'BACKSPACE' || event === 'ENTER') return
         setInput(stateNow += event);
-
-
-
     };
 
     async function SearchVideos(value: string) {
-        const response = await youtubeServices.getSearch(value);
+        const response = await youtubeServices.getSearch(value);        
         setSearch(response);
         return response;
     }
@@ -113,7 +104,7 @@ function Search() {
                     }
                     {
                         search.length === 0 && video.length > 0 &&
-                        video.map((video: any, index: number) => {
+                        video.map((video: ListaVideos, index: number) => {
 
                             return (<div className="coluna" key={index}>
                                 <CardVideo

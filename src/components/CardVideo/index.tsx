@@ -6,7 +6,9 @@ import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import './CardVideo.scss';
 
 interface CardField {
-    id: string,
+    id: {
+        videoId: string
+    },
     video: {
         snippet: {
             channelId: string,
@@ -26,6 +28,7 @@ export default function CardVideo(props: CardField) {
     const [iconChannel, setIconChannel] = useState<any>(null);
     const history = useHistory();
 
+
     useEffect(() => {
 
         (async function () {
@@ -35,8 +38,11 @@ export default function CardVideo(props: CardField) {
     }, []);
 
 
+
     const handleVideoClick = () => {
-        history.push(`/watch/${props.id}`)
+        props.id.videoId === undefined
+            ? history.push(`/watch/${props.id}`)
+            : history.push(`/watch/${props.id.videoId}`);
     }
 
     return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import YouTube from 'react-youtube';
+import YouTube, { Options } from 'react-youtube';
 import { useParams } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsDown, FaHeart } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +10,46 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Comment from '../../components/Comment';
 import VideoGallery from '../../components/VideoGallery';
+import SkeletonLoad from '../../components/SkeletonLoad';
 import './MediaPlayer.scss';
+
+
+interface GaleriaVideos {
+    id: string,
+    snippet: {
+        channelId: string;
+        channelTitle: string;
+        title: string;
+        thumbnails: {
+            default: {
+                url: string;
+            }
+        }
+    };
+    statistics: {
+        commentCount: string;
+        dislikeCount: string;
+        favoriteCount: string;
+        likeCount: string;
+        viewCount: string;
+    }
+}
+
+interface CommentsVideo {
+    id: string;
+    snippet: {
+        topLevelComment: {
+            snippet: {
+                authorProfileImageUrl: string;
+                authorDisplayName: string;
+                textDisplay: string;
+            }
+        }
+    }
+}
+
+
+
 
 
 function Watch() {
@@ -26,7 +65,8 @@ function Watch() {
     const notify = (text: string) => toast.success(text);
     const notifyError = (text: string) => toast.error(text);
 
-    const opts: any = {
+
+    const opts: Options = {
         width: '100%',
         height: '100%',
         playerVars: {
@@ -36,18 +76,17 @@ function Watch() {
 
 
     useEffect(() => {
-        (async function () {
-            const channel = youtubeServices.getChannelVideos(id);
-            const comment = youtubeServices.getComment(id);
-            const popularVideos = youtubeServices.getPopularVideos();
+        const channel = youtubeServices.getChannelVideos(id);
+        const comment = youtubeServices.getComment(id);
+        const popularVideos = youtubeServices.getPopularVideos();
 
 
-            Promise.all([channel, comment, popularVideos]).then((data) => {
-                setVideos(data[0]);
-                setComment(data[1]);
-                setGalleryVideos(data[2]);
-              });
-        }())
+        Promise.all([channel, comment, popularVideos]).then((data) => {
+            setVideos(data[0]);
+            setComment(data[1]);
+            setGalleryVideos(data[2]);
+        });
+
     }, [id])
 
 
@@ -55,8 +94,9 @@ function Watch() {
         let array = favorites;
         let addArray = true;
 
-        array.map((item: any, index: number) => {
-            if(video.id === null){
+        array.forEach((item: any, index: number) => {
+
+            if (video.id === null) {
                 notifyError("Não foi possivel adicionar como favorito");
                 setActiveElement(false);
             }
@@ -78,7 +118,7 @@ function Watch() {
         }
     }
 
-    function handlePlayer(event: any) {
+    function handlePlayer(event: Event) {
         setPlayer(event.target);
     }
 
@@ -92,6 +132,9 @@ function Watch() {
         }
 
     }
+
+
+    console.log(comment);
 
 
     return (
@@ -110,7 +153,7 @@ function Watch() {
                     <div className="media-grid__playlist">
                         <div className="media-grid__container">
 
-                            {galleryVideos.length > 0 ? galleryVideos.map((video: any, index: number) => {
+                            {galleryVideos.length > 0 ? galleryVideos.map((video: GaleriaVideos, index: number) => {
                                 return (
                                     <div key={index}>
                                         <VideoGallery
@@ -121,15 +164,10 @@ function Watch() {
                                         />
                                     </div>
                                 )
-                            }) : [10].map((index: number) => {
+                            }) : [...Array(10)].map((index: number) => {
                                 return (
-                                    <div key={index}>
-                                        <VideoGallery
-                                            thumb='https://media.istockphoto.com/vectors/loading-icon-template-update-or-loading-symbol-for-web-or-application-vector-id1163484671'
-                                            title='Op´s, Vido indisponível'
-                                            text=''
-                                            id=''
-                                        />
+                                    <div className="coluna" key={index}>
+                                        <SkeletonLoad />
                                     </div>
                                 )
                             })
@@ -139,7 +177,7 @@ function Watch() {
                     <div className="media-grid__information">
                         <div className="media-grid-information-video">
                             {
-                                videos.length > 0 ? videos.map((video: any, index: number) => {
+                                videos.length > 0 ? videos.map((video: GaleriaVideos, index: number) => {
                                     return (
                                         <div className="information-box" key={index}>
                                             <div className="information-box__title">
@@ -150,7 +188,7 @@ function Watch() {
                                             <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <Focusable onClickEnter={() => handleFavorite(video)}><button data-testid="btn-favorito" onClick={() =>handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></button></Focusable>
+                                                <Focusable onClickEnter={() => handleFavorite(video)}><button data-testid="btn-favorito" onClick={() => handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></button></Focusable>
 
                                             </div>
                                         </div>
@@ -173,7 +211,7 @@ function Watch() {
                             }
                         </div>
                         <div className="media-comments">
-                            {comment.length > 0 ? comment.map((comments: any, index: number) => {
+                            {comment.length > 0 ? comment.map((comments: CommentsVideo, index: number) => {
                                 return (
                                     <div key={index}>
                                         <Comment key={index}
@@ -184,7 +222,7 @@ function Watch() {
                                     </div>
                                 )
                             }) : <h4>Comentário indisponível</h4>
-                        }
+                            }
                         </div>
                     </div>
                 </div>
