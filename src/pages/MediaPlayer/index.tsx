@@ -133,10 +133,6 @@ function Watch() {
 
     }
 
-
-    console.log(comment);
-
-
     return (
         <SpatialNavigation>
             <Header />

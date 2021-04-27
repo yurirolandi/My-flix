@@ -26,10 +26,6 @@ const initialState: any = {
     video: []
 };
 
-console.log('initialState', initialState);
-
-
-
 export const appContext = createContext(initialState);
 
 
