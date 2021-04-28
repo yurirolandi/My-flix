@@ -3,25 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { youtubeServices } from '../../services/youtube';
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
+import { CardField } from './CardVideo.interface';
 import './CardVideo.scss';
 
-interface CardField {
-    id: {
-        videoId: string
-    },
-    video: {
-        snippet: {
-            channelId: string,
-            channelTitle: string,
-            title: string,
-            thumbnails: {
-                high: {
-                    url: string
-                }
-            },
-        }
-    }
-}
+
 
 export default function CardVideo(props: CardField) {
 

@@ -31,14 +31,12 @@ export default function CategoriesBar() {
         if (value === -600) return;
 
         setValue(value + -200)
-
     }
 
     function arrowRight() {
         if (value === 0) return;
 
         setValue(value + 200)
-
     }
 
     async function handleClick(value: string) {

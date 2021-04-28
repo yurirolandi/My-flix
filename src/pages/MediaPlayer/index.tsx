@@ -6,48 +6,13 @@ import { ToastContainer, toast } from 'react-toastify';
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import { youtubeServices } from '../../services/youtube';
+import { GaleriaVideos, CommentsVideo } from './MediaPlayer.interface';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Comment from '../../components/Comment';
 import VideoGallery from '../../components/VideoGallery';
 import SkeletonLoad from '../../components/SkeletonLoad';
 import './MediaPlayer.scss';
-
-
-interface GaleriaVideos {
-    id: string,
-    snippet: {
-        channelId: string;
-        channelTitle: string;
-        title: string;
-        thumbnails: {
-            default: {
-                url: string;
-            }
-        }
-    };
-    statistics: {
-        commentCount: string;
-        dislikeCount: string;
-        favoriteCount: string;
-        likeCount: string;
-        viewCount: string;
-    }
-}
-
-interface CommentsVideo {
-    id: string;
-    snippet: {
-        topLevelComment: {
-            snippet: {
-                authorProfileImageUrl: string;
-                authorDisplayName: string;
-                textDisplay: string;
-            }
-        }
-    }
-}
-
 
 
 

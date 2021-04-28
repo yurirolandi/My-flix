@@ -1,14 +1,11 @@
 import react from 'react';
+import { CommentType } from './Comment.interface'
 import './Comment.scss';
-interface CommentType {
-    authorProfileImageUrl: string,
-    authorDisplayName: string,
-    textDisplay: string,
-}
+
 
 export default function Comment(props: CommentType) {
-       
-    return(
+
+    return (
         <div className="comment">
             <img src={props.authorProfileImageUrl} />
             <div className="comment__content">

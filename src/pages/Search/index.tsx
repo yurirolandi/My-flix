@@ -8,7 +8,7 @@ import { FaKeyboard, FaSearch, FaArrowLeft } from "react-icons/fa";
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import { appContext } from "../../store";
-import {ListaVideos} from '../../components/types/video.interface'
+import { ListaVideos } from '../../components/types/video.interface'
 import './Search.scss';
 
 
@@ -17,9 +17,9 @@ function Search() {
     const [input, setInput] = useState("");
     const [search, setSearch] = useState([]);
     const [keyOn, setkeyOn] = useState(true);
-    const {video} = useContext(appContext)
+    const { video } = useContext(appContext)
 
-     
+
     const keyLetter = [
         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "BACKSPACE"],
         ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ENTER"],
@@ -51,7 +51,7 @@ function Search() {
     };
 
     async function SearchVideos(value: string) {
-        const response = await youtubeServices.getSearch(value);        
+        const response = await youtubeServices.getSearch(value);
         setSearch(response);
         return response;
     }

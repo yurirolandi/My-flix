@@ -2,14 +2,10 @@ import react from 'react';
 import { useHistory } from 'react-router-dom';
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
+import { galleryField } from './VideoGallery.interface';
 import './VideoGallery.scss'
 
-interface galleryField {
-    thumb: string,
-    title: string,
-    text: string,
-    id: string,
-}
+
 
 export default function VideoGallery(props: galleryField) {
 
