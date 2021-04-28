@@ -7,7 +7,7 @@ export default function Comment(props: CommentType) {
 
     return (
         <div className="comment">
-            <img src={props.authorProfileImageUrl} />
+            <img src={props.authorProfileImageUrl} alt="Logo" />
             <div className="comment__content">
                 <p>{props.authorDisplayName}</p>
                 <p>{props.textDisplay}</p>

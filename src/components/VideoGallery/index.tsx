@@ -1,4 +1,4 @@
-import react from 'react';
+import react from 'react'; 
 import { useHistory } from 'react-router-dom';
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';

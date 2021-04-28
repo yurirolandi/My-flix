@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from 'react';
+import react, { useEffect, useState } from 'react'; 
 import { useHistory } from 'react-router-dom';
 import { youtubeServices } from '../../services/youtube';
 // @ts-ignore
@@ -19,8 +19,8 @@ export default function CardVideo(props: CardField) {
         (async function () {
             const popularVideos = await youtubeServices.getChannels(props.video.snippet.channelId);
             setIconChannel(popularVideos);
-        }());
-    }, []);
+        }()); // eslint-disable-next-line
+    }, []); 
 
 
 

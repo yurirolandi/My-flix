@@ -20,8 +20,8 @@ function Home() {
         (async function () {
             const popularVideos = await youtubeServices.getPopularVideos();
             setVideo(popularVideos)
-        }())
-    }, [])
+        }()) // eslint-disable-next-line
+    }, []) 
 
 
     return (
