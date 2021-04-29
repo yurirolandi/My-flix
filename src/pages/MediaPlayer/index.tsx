@@ -39,7 +39,6 @@ function Watch() {
         },
     };
 
-
     useEffect(() => {
         const channel = youtubeServices.getChannelVideos(id);
         const comment = youtubeServices.getComment(id);
@@ -108,7 +107,7 @@ function Watch() {
                         <Focusable onClickEnter={() => {
                             onPlay();
                         }}>
-                            <YouTube videoId={`${id}`} opts={opts} onReady={handlePlayer} />
+                            <YouTube videoId={`${id}`} opts={opts} onReady={handlePlayer} key={id} />
                         </Focusable>
                     </div>
                     <div className="media-grid__playlist">
@@ -125,9 +124,9 @@ function Watch() {
                                         />
                                     </div>
                                 )
-                            }) : [...Array(10)].map((index: number) => {
+                            }) : [1, 2, 3, 4, 5].map((index: number) => {
                                 return (
-                                    <div className="coluna" key={index}>
+                                    <div className="coluna" key={index = + index}>
                                         <SkeletonLoad />
                                     </div>
                                 )
@@ -149,7 +148,11 @@ function Watch() {
                                             <div className="information-box__likeds">
                                                 <span><FaThumbsUp /> <p>{video.statistics.likeCount} Mil</p></span>
                                                 <span><FaThumbsDown /> <p>{video.statistics.dislikeCount} Mil</p></span>
-                                                <Focusable onClickEnter={() => handleFavorite(video)}><button data-testid="btn-favorito" onClick={() => handleFavorite(video)}><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></button></Focusable>
+                                                <Focusable onClickEnter={() => handleFavorite(video)}>
+                                                    <button className="teste-btn" data-testid="btn-favorito" onClick={() => handleFavorite(video)}>
+                                                        <FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p>
+                                                    </button>
+                                                </Focusable>
 
                                             </div>
                                         </div>
@@ -164,7 +167,11 @@ function Watch() {
                                         <div className="information-box__likeds">
                                             <span><FaThumbsUp /> <p> indisponível </p></span>
                                             <span><FaThumbsDown /> <p>indisponível </p></span>
-                                            <Focusable onClickEnter={() => handleFavorite()}><span><FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p></span></Focusable>
+                                            <Focusable  onClickEnter={() => handleFavorite()}>
+                                                <button className="btn-favorito-off" onClick={() => handleFavorite()}>
+                                                    <FaHeart className={activeElement ? 'active' : ''} /> <p>Favoritar</p>
+                                                </button>
+                                            </Focusable>
 
                                         </div>
                                     </div>

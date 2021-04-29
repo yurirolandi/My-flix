@@ -1,12 +1,15 @@
 import React from 'react';
-import { render, waitFor, fireEvent, screen } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Favorite from '../pages/Favorite';
 
+
 describe('Videos listados como favoritos', () => {
-    it('Deve conseguir remover o video do favorito', async () => {
-        const {  getByTestId } = render(<Favorite />);
-        const btnRemoveFavorito = await waitFor(() => getByTestId('removefavorito'));
-        fireEvent.click(btnRemoveFavorito);
-        expect(btnRemoveFavorito).toBeNull()
+   
+    it('Deve Aparecer que não tenho nenhum video como favorito', async () => {
+        const { getByTestId } = render(<Favorite />);
+        const text = await waitFor(() => getByTestId('sem-favorito'));
+        const valor = 'Você não tem nenhum video como favorito!'
+
+        expect(text).toHaveTextContent(valor)
     })
 });

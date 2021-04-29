@@ -20,7 +20,7 @@ export default function VideoGallery(props: galleryField) {
                 <div className="gallery">
                     <div className="gallery-container">
                         <div className="gallery-container__header">
-                            <img src={props.thumb} alt="" />
+                            <img src={props.thumb} alt="Logo" />
                         </div>
                         <div className="gallery-container__footer">
                             <div className="gallery-footer">

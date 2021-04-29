@@ -4,7 +4,7 @@ import Search from '../pages/Search';
 
 describe('Teste Search Component', () => {
     it('Deve buscar video de acordo com o campo de busca', async () => {
-        const { getByTestId, container } = render(<Search />);
+        const { getByTestId } = render(<Search />);
         const inputCampo = await waitFor(() => getByTestId('form__search'));
         const valorInput = 'React Js'
 
@@ -13,8 +13,5 @@ describe('Teste Search Component', () => {
 
         const btn = await waitFor(() => getByTestId('form__btn'));
         fireEvent.click(btn);
-
-        const card: any = container.querySelector('.focusable');        
-        fireEvent.keyPress(card, {key: "Enter", code: 13});
     });
 });

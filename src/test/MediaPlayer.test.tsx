@@ -1,24 +1,30 @@
 import React from 'react';
+import axios from 'axios';
 import { render, waitFor, fireEvent, screen } from '@testing-library/react';
-import MediaPlayer from '../pages/MediaPlayer';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history'
+import MediaPlayer from '../pages/MediaPlayer/';
 
 describe('Assistindo o video', () => {
     it('Deve Permitir poder favoritar o video', async () => {
-        const { getByTestId } = render(<MediaPlayer />);
-        const icone = await waitFor(() => getByTestId('btn-favorito'));
+        const rota = '/watch/XQxitgyZ_S4';
+        const history = createMemoryHistory()
+
+        const { container } = render(<Router history={history}>
+            <MediaPlayer />
+        </Router>);
+
+        history.push(rota);
+        screen.getByText('Favoritar', { exact: false });
+
+        const btnFavorito: any = container.querySelector('.btn-favorito-off');
+        fireEvent.click(btnFavorito)
+
         const textoSalvo = 'Video salvo como favorito com sucesso!'
 
-        fireEvent.click(icone);
         const texto = await screen.findAllByText(textoSalvo)
-        expect(texto).toBeInTheDocument()
-    });
-    it('Deve Permitir poder desmarcar o favoritar video', async () => {
-        const { getByTestId } = render(<MediaPlayer />);
-        const icone = await waitFor(() => getByTestId('btn-favorito'));
-        const textoSalvo = 'Video removido como favorito com sucesso!'
 
-        fireEvent.click(icone);
-        const texto = await screen.findAllByText(textoSalvo)
-        expect(texto).toBeInTheDocument()
-    })
+        expect(texto).toBeTruthy();
+    });
+
 })

@@ -58,7 +58,7 @@ function Favorite() {
                                         </Focusable>
                                     </div>
                                 </div>)
-                            }) : <h1>Você não tem nenhum video como favorito!</h1>
+                            }) : <h1 data-testid="sem-favorito">Você não tem nenhum video como favorito!</h1>
                     }
                 </div>
                 <ToastContainer />
