@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import { youtubeServices } from '../../services/youtube';
 import { FaKeyboard, FaSearch, FaArrowLeft } from "react-icons/fa";
 // @ts-ignore
-import SpatialNavigation, { Focusable, FocusableSection } from 'react-js-spatial-navigation';
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import './Search.scss';
 
 
