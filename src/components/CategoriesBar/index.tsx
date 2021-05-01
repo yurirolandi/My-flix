@@ -3,28 +3,16 @@ import { youtubeServices } from '../../services/youtube';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
+import { CategoriesBarInterface } from './CategoriesBar.interface';
 import './CategoriesBar.scss';
 import { appContext } from '../../store';
 
-const categories = [
-    'Tudo',
-    'React js',
-    'Angular js',
-    'React Native',
-    'Podcast',
-    'Javascript',
-    'Musicas',
-    'Neymar',
-    'Python',
-    'Oceano',
-    'Tubarões',
-    'The Flash',
-]
 
-export default function CategoriesBar() {
+
+export default function CategoriesBar(props: CategoriesBarInterface) {
     const [value, setValue] = useState(0);
     const [activeElement, setActiveElement] = useState('Tudo');
-    const { video, setVideo } = useContext(appContext)
+    const { video, setVideo } = useContext(appContext);
 
     function arrowLeft() {
 
@@ -60,7 +48,7 @@ export default function CategoriesBar() {
                     </div>
                     <div className="categoriesBar-wrapper">
                         <div className="categoriesBar-wrapper__items" style={{ transform: `translateX(${value}px)` }}>
-                            {categories.map((value: string, index: number) => (
+                            {props.categories.map((value: string, index: number) => (
 
                                 <Focusable className="box" key={index} onClickEnter={() => handleClick(value)}>
                                     <div

@@ -11,6 +11,22 @@ import { ListaVideos } from '../../components/types/video.interface';
 
 
 
+const categories = [
+    'Tudo',
+    'React js',
+    'Angular js',
+    'React Native',
+    'Podcast',
+    'Javascript',
+    'Musicas',
+    'Neymar',
+    'Python',
+    'Oceano',
+    'Tubarões',
+    'The Flash',
+]
+
+
 function Home() {
 
     const { video, setVideo } = useContext(appContext)
@@ -21,7 +37,7 @@ function Home() {
             const popularVideos = await youtubeServices.getPopularVideos();
             setVideo(popularVideos)
         }()) // eslint-disable-next-line
-    }, []) 
+    }, [])
 
 
     return (
@@ -30,7 +46,7 @@ function Home() {
             <Sidebar />
 
             <div className="container">
-                <CategoriesBar />
+                <CategoriesBar categories={categories} />
 
                 <div className="container__grid">
                     {

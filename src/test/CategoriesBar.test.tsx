@@ -1,16 +1,20 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Home from '../pages/Home';
+import CategoriesBar from '../components/CategoriesBar';
 
-describe('Teste Home Component', () => {
-    it('Deve buscar video de acordo com o campo de busca', async () => {
-        const { container } = render(<Home />);
-        const categorias: any = container.querySelector("div.categoriesBar-wrapper > div > div:nth-child(2)");
-        fireEvent.keyPress(categorias, {key: "Enter", code: 13});
-        screen.getByText('React Js', { exact: false });
+describe('Renderia o trilho de Categorias', () => {
+    const categories = [
+        'React js',
+    ]
 
-        const video: any = container.querySelector('.focusable');
-        fireEvent.keyPress(video, {key: "Enter", code: 13});       
+    it('Deve renderizar o trilho de categoria e escolher um', async () => {
+        const { container } = render(<CategoriesBar categories={categories} />);
 
+        const categoriaReact: any = container.querySelector('.focusable');
+
+        fireEvent.keyPress(categoriaReact, { key: "Enter", code: 13 });
+
+        expect(categoriaReact).toBeTruthy();
     });
 });
+
