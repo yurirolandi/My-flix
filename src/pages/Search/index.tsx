@@ -6,9 +6,7 @@ import Header from '../../components/Header';
 import { youtubeServices } from '../../services/youtube';
 import { FaKeyboard, FaSearch, FaArrowLeft } from "react-icons/fa";
 // @ts-ignore
-import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
-import { appContext } from "../../store";
-import { ListaVideos } from '../../components/types/video.interface'
+import SpatialNavigation, { Focusable, FocusableSection } from 'react-js-spatial-navigation';
 import './Search.scss';
 
 
@@ -17,7 +15,6 @@ function Search() {
     const [input, setInput] = useState("");
     const [search, setSearch] = useState([]);
     const [keyOn, setkeyOn] = useState(true);
-    const { video } = useContext(appContext)
 
 
     const keyLetter = [
@@ -102,26 +99,15 @@ function Search() {
                         )
                     })
                     }
-                    {
-                        search.length === 0 && video.length > 0 &&
-                        video.map((video: ListaVideos, index: number) => {
-
-                            return (<div className="coluna" key={index}>
-                                <CardVideo
-                                    video={video}
-                                    id={video.id}
-                                />
-                            </div>)
-                        })
-                    }
                 </div>
 
                 <div className={keyOn ? "keyboard" : "keyboard keyboard--hidden"}>
                     <div className="keyboard-keys">
+                                          
                         <div className="keyboard-keys__container">
                             {keyLetter[0].map((items: string, index: number) => {
                                 return (
-                                    <Focusable onFocus={items} onClickEnter={() => onChangeInput(items)} key={index}>
+                                    <Focusable onClickEnter={() => onChangeInput(items)} key={index}>
                                         <button type="button"
                                             value={items}
                                             className="keyboard-key"
@@ -175,6 +161,7 @@ function Search() {
                             })
                             }
                         </div>
+               
                     </div>
                 </div>
             </div>
