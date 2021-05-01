@@ -43,8 +43,8 @@ export default function CardVideo(props: CardField) {
                                 <div className="card-footer__logo">
                                     <img src={iconChannel?.url} alt="" />
                                 </div>
-                                <div className="card-footer__text">
-                                    <h3>{props.video.snippet.title}</h3>
+                                <div className="card-footer__text" >
+                                    <h3 data-testid="title-text">{props.video.snippet.title}</h3>
                                     <p>{props.video.snippet.channelTitle}</p>
                                 </div>
                             </div>
