@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 // @ts-ignore
 import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 import Header from '../../components/Header';
@@ -11,6 +12,7 @@ import './Favorite.scss';
 
 
 function Favorite() {
+    const history = useHistory();
     const [favorite, setFavorite] = useState([]);
     const notify = (text: string) => toast.success(text);
 
@@ -32,6 +34,12 @@ function Favorite() {
             };
         })
     }
+
+
+   function handleGoHome(){
+        history.push('/')
+    }
+
 
     return (
         <SpatialNavigation>
@@ -58,7 +66,10 @@ function Favorite() {
                                         </Focusable>
                                     </div>
                                 </div>)
-                            }) : <h1 data-testid="sem-favorito">Você não tem nenhum video como favorito!</h1>
+                            }) : <div className="coluna__notfound">
+                                    <h1 data-testid="sem-favorito">Você não tem nenhum video como favorito!</h1>
+                                    <Focusable onClickEnter={handleGoHome}><button onClick={handleGoHome}>Voltar</button></Focusable>
+                                </div>
                     }
                 </div>
                 <ToastContainer />
